@@ -1,11 +1,14 @@
 import { useState } from "react";
 
-export const Player = ({ initialName, symbol, isActive }) => {
+export const Player = ({ initialName, symbol, isActive, onSave }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [playerName, setPlayerName] = useState(initialName);
 
   function toggleEditing() {
     setIsEditing((editing) => !editing);
+    if (isEditing) {
+      onSave(symbol, playerName);
+    }
   }
 
   function handleChange(event) {
