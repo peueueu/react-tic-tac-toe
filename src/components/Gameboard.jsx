@@ -1,19 +1,18 @@
-const initialGameBoard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-
-export const Gameboard = () => {
+export const Gameboard = ({ onSelectSquare, board }) => {
   return (
     <ol id="game-board">
-      {initialGameBoard.map((row, index) => (
-        <li key={`row-${index}`}>
+      {board.map((row, rowIndex) => (
+        <li key={`row-${rowIndex}`}>
           <ol>
-            {row.map((col, index) => {
+            {row.map((playerSymbol, colIndex) => {
               return (
-                <li key={`col-${index}`}>
-                  <button>{col}</button>
+                <li key={`col-${colIndex}`}>
+                  <button
+                    onClick={() => onSelectSquare(rowIndex, colIndex)}
+                    disabled={playerSymbol !== null}
+                  >
+                    {playerSymbol}
+                  </button>
                 </li>
               );
             })}
